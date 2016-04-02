@@ -36,11 +36,13 @@ class GoogleMapsClient(object):
         location : tuple
             (latitude, longitude) in degs.
         """
-
-        if state is nan:
-            params = [city, country]
-        else:
-            params = [city, state, country]
+        params = []
+        if city is not nan:
+            params.append(city)
+        if state is not nan:
+            params.append(state)
+        if country is not nan:
+            params.append(country)
 
         try:
             address = ", ".join(params)
@@ -74,7 +76,7 @@ if __name__ == '__main__':
     answers = []
 
     for ii in range(3):
-        location = Session.get_lat_lon_from_city_country(cities[ii],
+        loc = Session.get_lat_lon_from_city_country(cities[ii],
                                                          countries[ii],
                                                          states[ii])
-        answers.append(location)
+        answers.append(loc)
